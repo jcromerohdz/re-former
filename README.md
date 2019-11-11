@@ -120,8 +120,7 @@ Done!
 Page loads.
 ```
 
-HTML Form
-The first form you build will be mostly HTML (remember that stuff at all?). Build it in your New view at app/views/users/new.html.erb. The goal is to build a form that is almost identical to what you’d get by using a Rails helper so you can see how it’s done behind the scenes.
+### HTML Form
 
 1. Build a form for creating a new user. See the w3 docs for forms if you’ve totally forgotten how they work. Specify the method and the action attributes in your <form> tag (use $ rake routes to see which HTTP method and path are being expected based on the resource you created). Include the attribute accept-charset="UTF-8" as well, which Rails naturally adds to its forms to specify Unicode character encoding.
 
@@ -240,4 +239,65 @@ Processing by UsersController#new as HTML
   Rendering users/new.html.erb within layouts/application
   Rendered users/new.html.erb within layouts/application (Duration: 0.1ms | Allocations: 20)
 Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.0ms | Allocations: 3584)
+```
+
+### Railsy-er Forms with #form_for
+
+1. Modify your #new action in the controller to instantiate a blank User object and store it in an instance variable called @user.
+```sh
+class UsersController < ApplicationController
+  def new
+    @user = User.new
+  end
+
+  def create
+    @user = User.new(user_params)
+
+    if @user.save
+      redirect_to new_users_path
+    else
+      render :new
+    end
+  end
+
+  private
+
+  def user_params
+    params.permit(:username, :email, :password)
+  end
+end
+```
+
+2. Comment out your #form_tag form in the app/views/users/new.html.erb view (so now you should have TWO commented out form examples).
+
+3. Rebuild the form using #form_for and the @user from your controller.
+```sh
+<h1> Over here </h1>
+<%= form_tag('/users') do %>
+ <%= label_tag(:username, 'Enter your username:') %>
+ <%= text_field_tag(:username) %><br>
+ <%= label_tag(:email, 'Enter your email:') %>
+ <%= text_field_tag(:email) %><br>
+ <%= label_tag(:password, 'Enter your password:') %>
+ <%= password_field_tag(:password) %><br>
+ <%= submit_tag('Submit') %>
+<% end %>
+```
+
+4. Play with the #input method options – add a default placeholder (like “example@example.com” for the email field), make it generate a different label than the default one (like “Your user name here”), and try starting with a value already populated. Some of these things you may need to Google for, but check out the #form_for Rails API docs
+```shi
+<%= form_tag('/users') do %>
+ <%= label_tag(:username, 'Enter your username:') %>
+ <%= text_field_tag(:username, nil, placeholder: 'Your user name here' ) %><br>
+ <%= label_tag(:email, 'Enter your email:') %>
+ <%= text_field_tag(:email, nil, placeholder: 'example@example.com') %><br>
+ <%= label_tag(:password, 'Enter your password:') %>
+ <%= password_field_tag(:password) %><br>
+ <%= submit_tag('Submit') %>
+<% end %>
+```
+
+5. Test it out. You’ll need to switch your controller’s #create method again to accept the nested :user hash from params.
+```sh
+It works!!
 ```
