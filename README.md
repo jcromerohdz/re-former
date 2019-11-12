@@ -418,4 +418,31 @@ Completed 200 OK in 150ms (Views: 129.5ms | ActiveRecord: 1.0ms | Allocations: 4
 ```
 
 5. Save this project to Git and upload to Github.
+```sh
+Done!
+```
+# Extra Credit
+1. Modify your form view to display a list of the error messages that are attached to your failed model object if you fail validations. Recall the #errors and #full_messages methods. Start by displaying them at the top and then modify
+```sh
+<h1>Sign up</h1>
+<%= form_for(@user) do |f| %>
+  <ul>
+    <% @user.errors.full_messages.each do |error| %>
+    <li style="color:red"><%= error %></li>
+    <% end %>
+  </ul>
+  .
+  .
+  .
+
+Then for Edit
+<h1>Edit User</h1>
+<%= form_for(@user, url: user_path) do |f| %> 
+  <ul>
+    <% @user.errors.full_messages.each do |error| %>
+    <li style="color:red"><%= error %></li>
+    <% end %>
+  </ul>     
+```
+  
 
