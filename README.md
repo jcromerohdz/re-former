@@ -1,27 +1,104 @@
-# README
+# Microverse Project Title - Forms [Collaborative Project]
+Ruby on Rails
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Introduction.
 
-Things you may want to cover:
+This project will teach you the multiple ways to build a form in rails that can send parameters to a controller so that it can build an instance of a model with those parameters.
 
-* Ruby version Feature branch
+Full task description: https://www.theodinproject.com/courses/ruby-on-rails/lessons/forms.
 
-* System dependencies
+### Microverse Adjustments
 
-* Configuration
+You should do the "Project 2: Ruby on Rails Tutorial " individually, and then you will complete the project Bare Metal Forms and Helpers together. Once you are finished with this project, continue working together with your coding partner on the next project. You must still remain in a video call with your partner during your independent work.
 
-* Database creation
+Please submit only "Project 1: Bare Metal Forms and Helpers ".
 
-* Database initialization
+###  Ruby version
 
-* How to run the test suite
+rbenv 2.6.5
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+###  System dependencies
 
-* ...
+Rails 6.0.1
+
+Yarn 1.19.1
+
+Ubuntu 18.04 & below
+
+###  Database creation
+sqlite3
+
+###  Database initialization
+
+###  How to run the test suite
+1. Go to "rails console"
+2. Rails test
+
+###  Services (job queues, cache servers, search engines, etc.)
+
+###  Deployment instructions
+
+1. Open the terminal.
+
+2. Enter git clone https://github.com/jcromerohdz/re-former
+
+3. Navigate to the cloned repository.
+
+4. Enter command "rails console" to start the backend 
+
+
+### ...
+
+
+### Instructions
+
+1. Just like in the warmup, plan out what data models you would need to allow users to be on the site (don’t worry about login/logout or securing the passwords right now), to submit links (“posts”), and to comment on links. Users do NOT need to be able to comment on comments… each comment refers to a Post.
+
+2. Generate a new rails app from the command line ($ rails new micro-reddit) and open it up. We’ll use the default SQLite3 database so you shouldn’t have to change anything on that front.
+```sh
+Done!
+```
+
+3. Generate your User model and fill out the migration to get the columns you want.
+Run the migration with $ rails db:migrate. You can use $ rails db:rollback if you realize you forgot anything or just create a new migration for the correction (which might involve the #add_column #remove_column or #change_column commands). See the Rails API Documentation for details on syntax and available methods.
+```sh
+rails generate model User username:string email:string password:string
+
+Running via Spring preloader in process 2141
+      invoke  active_record
+      create    db/migrate/20191107154740_create_users.rb
+      create    app/models/user.rb
+      invoke    test_unit
+      create    test/models/user_test.rb
+      create    test/fixtures/users.yml
+```
+
+Migrate DB;
+
+```sh
+rails db:migrate
+/home/ggoh/.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/railties-6.0.1/lib/rails/app_loader.rb:53: warning: Insecure world writable dir /mnt/c in PATH, mode 040777
+== 20191107154740 CreateUsers: migrating ======================================
+-- create_table(:users)
+   -> 0.0036s
+== 20191107154740 CreateUsers: migrated (0.0039s) =============================
+```
+
+Comfirm migration files was created in micro-reddit/db/migrate
+```sh
+class CreateUsers < ActiveRecord::Migration[6.0]
+  def change
+    create_table :users do |t|
+      t.string :username
+      t.string :email
+      t.string :password
+
+      t.timestamps
+    end
+  end
+end
+```
 
 ### Set up the Back End
 
@@ -241,7 +318,7 @@ Processing by UsersController#new as HTML
 Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.0ms | Allocations: 3584)
 ```
 
-### Railsy-er Forms with #form_for
+### Railsy-er Forms with #form_tag
 
 1. Modify your #new action in the controller to instantiate a blank User object and store it in an instance variable called @user.
 ```sh
@@ -445,4 +522,17 @@ Then for Edit
   </ul>     
 ```
   
+### Source
+
+https://www.theodinproject.com/courses/ruby-on-rails/lessons/forms?ref=lnav
+
+### Github Repo
+
+https://github.com/jcromerohdz/re-former
+
+### Authors
+
+* [@Christian](https://github.com/jcromerohdz)
+
+* [@Gerald](https://github.com/geraldgsh)
 
