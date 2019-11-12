@@ -301,3 +301,43 @@ end
 ```sh
 It works!!
 ```
+
+# Railsy-er Forms with #form_for
+#form_tag probably didn’t feel that useful – it’s about the same amount of work as using <form>, though it does take care of the authenticity token stuff for you. Now we’ll convert that into #form_for, which will make use of our model objects to build the form.
+
+1. Modify your #new action in the controller to instantiate a blank User object and store it in an instance variable called @user.
+```sh
+class UsersController < ApplicationController
+  def new
+    @user = User.new
+  end
+  .
+  .
+  .
+```
+2. Comment out your #form_tag form in the app/views/users/new.html.erb view (so now you should have TWO commented out form examples).
+
+3. Rebuild the form using #form_for and the @user from your controller.
+
+4. Play with the #input method options – add a default placeholder (like “example@example.com” for the email field), make it generate a different label than the default one (like “Your user name here”), and try starting with a value already populated. Some of these things you may need to Google for, but check out the #form_for Rails API docs
+```sh
+<h1>Sign up</h1>
+  <%= form_for(@user) do |f| %>        
+        <%= f.label :username %>
+        <%= f.text_field :username, placeholder: 'Your user name here', class: 'form-control' %>
+        <br>
+        <%= f.label :email %>
+        <%= f.email_field :email, placeholder: 'Your email@here.com', class: 'form-control' %>
+        <br>
+        <%= f.label :password %>
+        <%= f.password_field :password, class: 'form-control' %>
+        <br>
+        <%= f.submit "Submit", class: "btn btn-outline-primary" %>
+  <% end %>
+```
+
+5. Test it out. You’ll need to switch your controller’s #create method again to accept the nested :user hash from params.
+```sh
+It work!
+```
+

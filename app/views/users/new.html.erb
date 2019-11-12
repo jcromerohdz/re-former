@@ -22,7 +22,9 @@
   <input type="submit" value="Submit">
 </form> -->
 
-<h1> Over here </h1>
+<%
+=begin%>
+ <h1> Over here </h1>
 <%= form_tag('/users') do %>
  <%= label_tag(:username, 'Enter your username:') %>
  <%= text_field_tag(:username, nil, placeholder: 'Your user name here' ) %><br>
@@ -31,4 +33,20 @@
  <%= label_tag(:password, 'Enter your password:') %>
  <%= password_field_tag(:password) %><br>
  <%= submit_tag('Submit') %>
-<% end %>
+<% end %> 
+<%
+=end%>
+
+<h1>Sign up</h1>
+        <%= form_for(@user) do |f| %>        
+        <%= f.label :username %>
+        <%= f.text_field :username, placeholder: 'Your username', class: 'form-control' %>
+        <br>
+        <%= f.label :email %>
+        <%= f.email_field :email, placeholder: 'Your email', class: 'form-control' %>
+        <br>
+        <%= f.label :password %>
+        <%= f.password_field :password, class: 'form-control' %>
+        <br>
+        <%= f.submit "Submit", class: "btn btn-outline-primary" %>
+        <% end %>
