@@ -1,0 +1,5 @@
+<ul>
+    <% @user.errors.full_messages.each do |error| %>
+    <li style="color:red"><%= error %></li>
+    <% end %>
+  </ul>   
