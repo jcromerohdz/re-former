@@ -1,18 +1,2 @@
 <h1>Edit User</h1>
-<%= form_for(@user, url: user_path) do |f| %> 
-  <ul>
-    <% @user.errors.full_messages.each do |error| %>
-    <li style="color:red"><%= error %></li>
-    <% end %>
-  </ul>       
-  <%= f.label :username %>
-  <%= f.text_field :username, placeholder: 'Your username', class: 'form-control' %>
-  <br>
-  <%= f.label :email %>
-  <%= f.email_field :email, placeholder: 'Your email', class: 'form-control' %>
-  <br>
-  <%= f.label :password %>
-  <%= f.password_field :password, class: 'form-control' %>
-  <br>
-  <%= f.submit "Submit", class: "btn btn-outline-primary" %>
-<% end %>
+<%= render "form", user: @user,  url: user_path %>
